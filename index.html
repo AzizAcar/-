@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>Doğum günün kutlu olsun 🎉🥳</title>
 
@@ -22,16 +23,17 @@
     }
 
     .card {
-      padding: 40px;
+      padding: 30px;
+      margin: 20px;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 20px;
       background: rgba(255,255,255,0.05);
       backdrop-filter: blur(10px);
-      max-width: 400px;
+      max-width: 90%;
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 26px;
       margin-bottom: 20px;
     }
 
@@ -44,6 +46,7 @@
       cursor: pointer;
       font-size: 16px;
       transition: 0.3s;
+      width: 100%;
     }
 
     button:hover {
@@ -61,7 +64,7 @@
 
   <div class="card">
     <h1>🎉 İyi ki Doğdun!</h1>
-    <button onclick="surprise(); this.disabled=true;">Aç 🎁</button>
+    <button onclick="surprise()">Tıkla 🎁</button>
   </div>
 
   <script>
