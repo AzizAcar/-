@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Doğum günün kutlu olsun 🎉🥳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Küçük bir hediye :)</title>
 
-  <!--bunu görüyorsan bil ki senden hoşlanıyorum :) iyiki varsın ❤-->
-
+  <!-- Konfeti kütüphanesi -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -38,6 +37,7 @@
     }
 
     button {
+      width: 100%;
       padding: 12px 24px;
       border: none;
       border-radius: 12px;
@@ -46,7 +46,6 @@
       cursor: pointer;
       font-size: 16px;
       transition: 0.3s;
-      width: 100%;
     }
 
     button:hover {
@@ -63,35 +62,69 @@
 <body>
 
   <div class="card">
-    <h1>🎉 İyi ki Doğdun!</h1>
-    <button onclick="surprise()">Tıkla 🎁</button>
+    <h1>İyi ki Doğdun :)🎉</h1>
+    <button id="confettiBtn">Tıkla 🎁</button>
+    <!-- Doğum günü düdüğü -->
+    <audio id="birthdaySound" src="https://www.soundjay.com/human/birthday-bell-1.mp3" preload="auto"></audio>
   </div>
 
   <script>
-    function surprise() {
-      var duration = 2000;
-      var end = Date.now() + duration;
+    const btn = document.getElementById("confettiBtn");
+    const sound = document.getElementById("birthdaySound");
+    let isCoolingDown = false;
+
+    // Buton yazıları
+    const messages = [
+      "Tıkla 🎁",
+      "Patlat 🎉",
+      "Sürpriz!",
+      "Tekrar 🎊"
+    ];
+
+    function getRandomMessage() {
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    btn.addEventListener("click", () => {
+      if (isCoolingDown) return;
+
+      isCoolingDown = true;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        isCoolingDown = false;
+        btn.disabled = false;
+        btn.innerText = getRandomMessage(); // her tıklamada yazı değişir
+      }, 4000); // 4 saniye cooldown
+
+      // konfeti animasyonu
+      const duration = 2000;
+      const end = Date.now() + duration;
 
       (function frame() {
         confetti({
           particleCount: 10,
           angle: 60,
-          spread: 60,
+          spread: 80,
+          startVelocity: 45,
           origin: { x: 0 }
         });
-
         confetti({
           particleCount: 10,
           angle: 120,
-          spread: 60,
+          spread: 80,
+          startVelocity: 45,
           origin: { x: 1 }
         });
-
         if (Date.now() < end) {
           requestAnimationFrame(frame);
         }
       })();
-    }
+
+      // düdük çal
+      sound.currentTime = 0; // baştan çal
+      sound.play();
+    });
   </script>
 
 </body>
